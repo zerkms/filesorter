@@ -79,10 +79,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chunker.hpp" />
+    <ClInclude Include="dummy_sorter.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="chunker.cpp" />
+    <ClCompile Include="dummy_sorter.cpp" />
     <ClCompile Include="sorter.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
