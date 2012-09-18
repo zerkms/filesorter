@@ -12,10 +12,10 @@ namespace sorter {
     {
     private:
         string _tmp_dir;
-        int _chunk_size;
-        int _current_index;
+        size_t _chunk_size;
+        size_t _current_index;
 
-        void WriteChunk(vector<string>& rows);
+        void WriteChunk(const vector<string>& rows);
         string GetNextChunkName(void);
 
     public:

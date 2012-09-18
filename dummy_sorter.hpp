@@ -8,7 +8,7 @@ namespace sorter {
     class DummySorter
     {
     private:
-        int _memoryLimit;
+        size_t _memoryLimit;
         std::string _inputName, _outputName, _tmdDir;
 
     public:

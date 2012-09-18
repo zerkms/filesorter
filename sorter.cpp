@@ -1,13 +1,11 @@
 // sorter.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-
 #include "dummy_sorter.hpp"
 
 using namespace sorter;
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char** argv)
 {
     DummySorter sorter(100);
 

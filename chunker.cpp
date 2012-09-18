@@ -21,8 +21,7 @@ void Chunker::Chunk(const string& _inputName)
     string tmp_string;
     vector<string> buffer;
 
-    int chunk_index = 0;
-    int current_size = 0;
+    size_t current_size = 0;
 
     if (!finput.is_open()) {
         // @TODO throw exception
@@ -44,15 +43,20 @@ void Chunker::Chunk(const string& _inputName)
     finput.close();
 }
 
-// constant reference?
-void Chunker::WriteChunk(vector<string>& rows)
+void Chunker::WriteChunk(const vector<string>& rows)
 {
     string filename = GetNextChunkName();
 
     ofstream chunk(filename);
 
-    for (vector<string>::iterator i = rows.begin(); i < rows.end(); i++) {
-        chunk << *i << endl;
+    if (!chunk.good()) {
+        // @TODO: throw exception
+    }
+
+    vector<string>::const_iterator it = rows.begin(), ite = rows.end();
+
+    for (; it != ite; ++it) {
+        chunk << *it << endl;
     }
 
     chunk.close();
@@ -61,8 +65,8 @@ void Chunker::WriteChunk(vector<string>& rows)
 string Chunker::GetNextChunkName(void)
 {
     string filename = string(_tmp_dir);
-    filename.append("\\_");
-    filename.append(to_string(_current_index++));
-    filename.append(".chunk");
+    filename += "\\_";
+    filename += to_string(_current_index++);
+    filename += ".chunk";
     return filename;
 }
