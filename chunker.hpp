@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "chunk_sorter.hpp"
+
 using namespace std;
 
 namespace sorter {
@@ -11,11 +13,12 @@ namespace sorter {
     class Chunker
     {
     private:
+        ChunkSorter sorter;
         string _tmp_dir;
         size_t _chunk_size;
         size_t _current_index;
 
-        string WriteChunk(const vector<string>& rows);
+        string WriteChunk(vector<string>& rows);
         string GetNextChunkName(void);
 
     public:

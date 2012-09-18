@@ -21,6 +21,9 @@
     <ClInclude Include="chunker.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="chunk_sorter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sorter.cpp">
@@ -30,6 +33,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="chunker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chunk_sorter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

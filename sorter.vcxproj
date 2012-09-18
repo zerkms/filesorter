@@ -77,10 +77,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="chunker.hpp" />
+    <ClInclude Include="chunk_sorter.hpp" />
     <ClInclude Include="dummy_sorter.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chunker.cpp" />
+    <ClCompile Include="chunk_sorter.cpp" />
     <ClCompile Include="dummy_sorter.cpp" />
     <ClCompile Include="sorter.cpp" />
   </ItemGroup>
