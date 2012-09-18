@@ -8,11 +8,11 @@ namespace sorter {
     class DummySorter
     {
     private:
-        size_t _memoryLimit;
-        std::string _inputName, _outputName, _tmdDir;
+        size_t _memory_limit;
+        std::string _input_name, _output_name, _tmp_dir;
 
     public:
-        DummySorter(int memoryLimit);
+        DummySorter(int memory_limit);
         void Sort(const std::string& input, const std::string& output);
     };
 

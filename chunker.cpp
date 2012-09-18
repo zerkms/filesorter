@@ -7,14 +7,14 @@
 using namespace std;
 using namespace sorter;
 
-Chunker::Chunker(const string& tmp_dir, int chunk_size)
+Chunker::Chunker(const string& tmp_dir, int chunk_size) : _tmp_dir(tmp_dir), _chunk_size(chunk_size)
 {
-    _tmp_dir = tmp_dir;
-    _chunk_size = chunk_size;
 }
 
-void Chunker::Chunk(const string& _inputName)
+vector<string> Chunker::Chunk(const string& _inputName)
 {
+    vector<string> chunks;
+
     _current_index = 0;
 
     ifstream finput(_inputName);
@@ -31,7 +31,7 @@ void Chunker::Chunk(const string& _inputName)
         current_size += tmp_string.size();
 
         if (current_size > _chunk_size) {
-            WriteChunk(buffer);
+            chunks.push_back(WriteChunk(buffer));
 
             buffer.clear();
             current_size = tmp_string.size();
@@ -41,13 +41,15 @@ void Chunker::Chunk(const string& _inputName)
     }
 
     if (buffer.size() > 0) {
-        WriteChunk(buffer);
+        chunks.push_back(WriteChunk(buffer));
     }
 
     finput.close();
+
+    return chunks;
 }
 
-void Chunker::WriteChunk(const vector<string>& rows)
+string Chunker::WriteChunk(const vector<string>& rows)
 {
     string filename = GetNextChunkName();
 
@@ -68,6 +70,8 @@ void Chunker::WriteChunk(const vector<string>& rows)
     }
 
     chunk.close();
+
+    return filename;
 }
 
 string Chunker::GetNextChunkName(void)

@@ -15,12 +15,12 @@ namespace sorter {
         size_t _chunk_size;
         size_t _current_index;
 
-        void WriteChunk(const vector<string>& rows);
+        string WriteChunk(const vector<string>& rows);
         string GetNextChunkName(void);
 
     public:
         Chunker(const string& tmp_dir, int chunk_size);
-        void Chunk(const string& input);
+        vector<string> Chunk(const string& input);
     };
 
 }

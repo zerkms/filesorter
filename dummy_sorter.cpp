@@ -3,18 +3,16 @@
 
 using namespace sorter;
 
-DummySorter::DummySorter(int memoryLimit)
+DummySorter::DummySorter(int memory_limit) : _memory_limit(memory_limit), _tmp_dir("tmp")
 {
-    _memoryLimit = memoryLimit;
-    _tmdDir = "tmp";
 }
 
-void DummySorter::Sort(const std::string& input, const std::string& output)
+void DummySorter::Sort(const std::string& input_name, const std::string& output_name)
 {
-    _inputName = input;
-    _outputName = output;
+    _input_name = input_name;
+    _output_name = output_name;
 
-    Chunker chunker(_tmdDir, _memoryLimit);
-    chunker.Chunk(_inputName);
+    Chunker chunker(_tmp_dir, _memory_limit);
+    chunker.Chunk(_input_name);
 }
 
