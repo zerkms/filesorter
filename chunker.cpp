@@ -11,42 +11,48 @@ Chunker::Chunker(const string& tmp_dir, int chunk_size) : _tmp_dir(tmp_dir), _ch
 {
 }
 
-vector<string> Chunker::Chunk(const string& _inputName)
+vector<string> Chunker::Chunk(const string& _input_name)
 {
     vector<string> chunks;
 
     _current_index = 0;
 
-    ifstream finput(_inputName);
-    string tmp_string;
+    ifstream finput(_input_name);
     vector<string> buffer;
-
-    size_t current_size = 0;
 
     if (!finput.is_open()) {
         // @TODO throw exception
     }
 
-    while (getline(finput, tmp_string)) {
-        current_size += tmp_string.size();
-
-        if (current_size > _chunk_size) {
-            chunks.push_back(WriteChunk(buffer));
-
-            buffer.clear();
-            current_size = tmp_string.size();
-        }
-
-        buffer.push_back(tmp_string);
-    }
-
-    if (buffer.size() > 0) {
+    while (FillChunkBuffer(finput, buffer)) {
         chunks.push_back(WriteChunk(buffer));
+        buffer.clear();
     }
 
     finput.close();
 
     return chunks;
+}
+
+bool Chunker::FillChunkBuffer(ifstream& input_stream, vector<string>& rows) const
+{
+    size_t current_size = 0;
+    string tmp_string;
+
+    while (getline(input_stream, tmp_string)) {
+        current_size += tmp_string.size();
+        rows.push_back(tmp_string);
+
+        if (current_size > _chunk_size) {
+            break;
+        }
+    }
+
+    if (current_size > 0) {
+        return true;
+    }
+
+    return false;
 }
 
 string Chunker::WriteChunk(vector<string>& rows)

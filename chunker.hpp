@@ -18,12 +18,13 @@ namespace sorter {
         size_t _chunk_size;
         size_t _current_index;
 
+        bool FillChunkBuffer(ifstream& input_stream, vector<string>& rows) const;
         string WriteChunk(vector<string>& rows);
         string GetNextChunkName(void);
 
     public:
         Chunker(const string& tmp_dir, int chunk_size);
-        vector<string> Chunk(const string& input);
+        vector<string> Chunk(const string& input_name);
     };
 
 }
