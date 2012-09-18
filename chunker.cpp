@@ -40,6 +40,10 @@ void Chunker::Chunk(const string& _inputName)
         buffer.push_back(tmp_string);
     }
 
+    if (buffer.size() > 0) {
+        WriteChunk(buffer);
+    }
+
     finput.close();
 }
 
@@ -56,7 +60,11 @@ void Chunker::WriteChunk(const vector<string>& rows)
     vector<string>::const_iterator it = rows.begin(), ite = rows.end();
 
     for (; it != ite; ++it) {
-        chunk << *it << endl;
+        if (it != rows.begin()) {
+            chunk << endl;
+        }
+
+        chunk << *it;
     }
 
     chunk.close();
