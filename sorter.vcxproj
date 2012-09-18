@@ -76,9 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="chunker.hpp" />
     <ClInclude Include="dummy_sorter.hpp" />
   </ItemGroup>
