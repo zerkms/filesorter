@@ -79,11 +79,13 @@
     <ClInclude Include="chunker.hpp" />
     <ClInclude Include="chunk_sorter.hpp" />
     <ClInclude Include="dummy_sorter.hpp" />
+    <ClInclude Include="merger.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chunker.cpp" />
     <ClCompile Include="chunk_sorter.cpp" />
     <ClCompile Include="dummy_sorter.cpp" />
+    <ClCompile Include="merger.cpp" />
     <ClCompile Include="sorter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
