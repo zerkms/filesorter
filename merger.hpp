@@ -19,7 +19,7 @@ namespace sorter {
 
     public:
         Merger(const std::string& output_name, const std::string& tmp_dir, const size_t& memory_limit);
-        void Merge(const std::vector<std::string>& chunks);
+        std::string Merge(const std::vector<std::string>& chunks);
     };
 
 }

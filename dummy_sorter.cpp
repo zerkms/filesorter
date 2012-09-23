@@ -19,7 +19,8 @@ void DummySorter::Sort(const std::string& input_name, const std::string& output_
     chunks = chunker.Chunk(_input_name);
 
     Merger merger(output_name, _tmp_dir, _memory_limit);
-    merger.Merge(chunks);
+    std::string last_chunk = merger.Merge(chunks);
 
+    rename(last_chunk.c_str(), output_name.c_str());
 }
 

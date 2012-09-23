@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <stdio.h>
 
 #include "merger.hpp"
 #include "stream_buffer_iterator.hpp"
@@ -16,7 +17,7 @@ Merger::Merger(const std::string& output_name, const std::string& tmp_dir, const
 {
 }
 
-void Merger::Merge(const std::vector<std::string>& chunks)
+std::string Merger::Merge(const std::vector<std::string>& chunks)
 {
     std::vector<std::string> new_chunks = chunks;
 
@@ -25,6 +26,8 @@ void Merger::Merge(const std::vector<std::string>& chunks)
     do {
         new_chunks = MergeChunks(new_chunks);
     } while(new_chunks.size() != 1);
+
+    return new_chunks.front();
 }
 
 std::vector<std::string> Merger::MergeChunks(const std::vector<std::string>& chunks)
@@ -63,6 +66,9 @@ std::vector<std::string> Merger::MergeChunks(const std::vector<std::string>& chu
         left_stream.close();
         right_stream.close();
         result_stream.close();
+
+        remove(left.c_str());
+        remove(right.c_str());
 
         new_chunks.push_back(new_chunk);
     }
