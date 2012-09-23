@@ -91,7 +91,7 @@ void Merger::MergeStreams(std::ifstream& input_left, std::ifstream& input_right,
 
     while (it_left != ite_left && it_right != ite_right) {
         if (!first_line) {
-            output << std::endl;
+            output << '\n';
         } else {
             first_line = false;
         }
@@ -109,11 +109,11 @@ void Merger::MergeStreams(std::ifstream& input_left, std::ifstream& input_right,
     }
 
     for (; it_left != ite_left; ++it_left) {
-        output << std::endl << *it_left;
+        output << '\n' << *it_left;
     }
 
     for (; it_right != ite_right; ++it_right) {
-        output << std::endl << *it_right;
+        output << '\n' << *it_right;
     }
 }
 

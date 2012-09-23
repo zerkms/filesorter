@@ -71,7 +71,7 @@ string Chunker::WriteChunk(vector<string>& rows)
 
     for (; it != ite; ++it) {
         if (it != rows.begin()) {
-            chunk << endl;
+            chunk << '\n';
         }
 
         chunk << *it;
