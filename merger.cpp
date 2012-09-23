@@ -4,10 +4,15 @@
 #include <iostream>
 
 #include "merger.hpp"
+#include "stream_buffer_iterator.hpp"
 
 using namespace sorter;
 
-Merger::Merger(const std::string& output_name, const std::string& tmp_dir) : output_name(output_name), tmp_dir(tmp_dir)
+Merger::Merger(const std::string& output_name, const std::string& tmp_dir, const size_t& memory_limit)
+    :
+    output_name(output_name),
+    tmp_dir(tmp_dir),
+    memory_limit(memory_limit)
 {
 }
 
@@ -67,20 +72,22 @@ std::vector<std::string> Merger::MergeChunks(const std::vector<std::string>& chu
 
 void Merger::MergeStreams(std::ifstream& input_left, std::ifstream& input_right, std::ofstream& output)
 {
-    std::vector<std::string> left_lines, right_lines;
-    ReadStream(input_left, left_lines);
-    ReadStream(input_right, right_lines);
-
     std::string value_left, value_right;
+    size_t memory_for_iterator = memory_limit / 2;
 
-    std::vector<std::string>::const_iterator it_left = left_lines.begin(),
-        it_right = right_lines.begin(),
-        ite_left = left_lines.end(),
-        ite_right = right_lines.end();
+    StreamBufferIterator
+        it_left(input_left, memory_for_iterator),
+        ite_left = it_left.end(),
+        it_right(input_right, memory_for_iterator),
+        ite_right = it_right.end();
+
+    bool first_line(true);
 
     while (it_left != ite_left && it_right != ite_right) {
-        if (it_left != left_lines.begin() || it_right != right_lines.begin()) {
+        if (!first_line) {
             output << std::endl;
+        } else {
+            first_line = false;
         }
 
         value_left = *it_left;
@@ -88,10 +95,10 @@ void Merger::MergeStreams(std::ifstream& input_left, std::ifstream& input_right,
 
         if (value_left.compare(value_right) < 0) {
             output << value_left;
-            it_left++;
+            ++it_left;
         } else {
             output << value_right;
-            it_right++;
+            ++it_right;
         }
     }
 

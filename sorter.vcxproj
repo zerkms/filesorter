@@ -80,6 +80,7 @@
     <ClInclude Include="chunk_sorter.hpp" />
     <ClInclude Include="dummy_sorter.hpp" />
     <ClInclude Include="merger.hpp" />
+    <ClInclude Include="stream_buffer_iterator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chunker.cpp" />
@@ -87,6 +88,7 @@
     <ClCompile Include="dummy_sorter.cpp" />
     <ClCompile Include="merger.cpp" />
     <ClCompile Include="sorter.cpp" />
+    <ClCompile Include="stream_buffer_iterator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

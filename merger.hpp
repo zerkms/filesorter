@@ -10,7 +10,7 @@ namespace sorter {
     {
     protected:
         std::string output_name, tmp_dir;
-        size_t chunk_id;
+        size_t chunk_id, memory_limit;
 
         std::string GetNextChunkName(void);
         std::vector<std::string> MergeChunks(const std::vector<std::string>& chunks);
@@ -18,7 +18,7 @@ namespace sorter {
         void ReadStream(std::ifstream& stream, std::vector<std::string>& output_vector) const;
 
     public:
-        Merger(const std::string& output_name, const std::string& tmp_dir);
+        Merger(const std::string& output_name, const std::string& tmp_dir, const size_t& memory_limit);
         void Merge(const std::vector<std::string>& chunks);
     };
 
